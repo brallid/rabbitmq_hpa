@@ -34,6 +34,12 @@ def send_to_monitoring(value):
     series = monitoring_v3.TimeSeries()
     series.metric.type = "custom.googleapis.com/rabbitmq_queue_messages"
     series.resource.type = "gke_container"
+    series.resource.labels["instance_id"] = ""
+    series.resource.labels["zone"] = "europe-west4-c"
+    series.resource.labels["cluster_name"] = "gke-whitson-test1"
+    series.resource.labels["container_name"] = ""
+    series.resource.labels["namespace_id"] = "monitoring"
+    series.resource.labels["pod_id"] = ""
     series.points = [point]
 
     # Send the data point
@@ -44,4 +50,4 @@ if __name__ == "__main__":
         value = query_prometheus()
         if value is not None:
             send_to_monitoring(value)
-        time.sleep(1)  # Run every 5 seconds
+        time.sleep(5)  # Run every 5 seconds
