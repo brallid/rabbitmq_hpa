@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-monitor
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq-monitor
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-monitor
+    spec:
+      containers:
+      - name: rabbitmq-monitor
+        image: us-central1-docker.pkg.dev/brando-brando-sandbox/my-repo/rabbitmq-monitor:latest
