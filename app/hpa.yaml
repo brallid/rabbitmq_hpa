@@ -1,19 +1,20 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: sample-app-hpa
+  name: sample-app
   namespace: default
 spec:
-  minReplicas: 1
-  maxReplicas: 10
-  metric:
-  - type: External
-    custom:
+  maxReplicas: 3
+  metrics:
+  - external:
       metric:
         name: custom.googleapis.com|rabbitmq_queue_messages
+        selector: {}
       target:
-        type: AverageValue
-        averageValue: 10
+        type: Value
+        value: "10"
+    type: External
+  minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
