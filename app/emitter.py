@@ -10,7 +10,7 @@ client = monitoring_v3.MetricServiceClient()
 project_name = "projects/brando-brando-sandbox"
 
 # Prometheus URL
-prometheus_url = 'http://10.136.1.35:9090/api/v1/query?query=rabbitmq_queue_messages'
+prometheus_url = 'http://10.136.0.11:9090/api/v1/query?query=rabbitmq_queue_messages'
 
 def query_prometheus():
     response = requests.get(prometheus_url)
